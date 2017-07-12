@@ -4,6 +4,8 @@ import './App.css'
 import CurrentReading from './CurrentReading'
 import WantToRead from './WantToRead'
 import Read from './Read'
+import { Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -32,8 +34,10 @@ class BooksApp extends React.Component {
             </div>
           </div>
         ) : (
-          <div className="list-books">
+          <Route exact path='/' render={() => (
+            <div className="list-books">
             <div className="list-books-title">
+            <h1>MyRead</h1>
             </div>
             <div className="list-books-content">
               <div>
@@ -43,9 +47,16 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <Link 
+              to='/search'
+              onClick={() => this.setState({ showSearchPage: true })}>
+              Add a book</Link>
             </div>
           </div>
+          
+          )
+        }
+        />
         )}
       </div>
     )
