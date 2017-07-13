@@ -4,6 +4,7 @@ import Book from './Book'
 
 class MainShelf extends Component {
     render() {
+      const booksVisible = this.props
     return (
     <div>
       <div className="bookshelf">
@@ -25,6 +26,14 @@ class MainShelf extends Component {
                             </div>
                           </div>
                           <div className="book-title">To Kill a Mockingbird</div>
+                          <ol>
+                          {this.props.books.map((book) => (
+                            <li key={booksVisible.id}>
+                            {booksVisible.title}
+                            </li>
+                          ))}
+                            </ol>
+
                           <div className="book-authors">Harper Lee</div>
                         </div>
                       </li>
