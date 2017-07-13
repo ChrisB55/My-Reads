@@ -1,9 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import CurrentReading from './CurrentReading'
-import WantToRead from './WantToRead'
-import Read from './Read'
+import MainShelf from './MainShelf'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 
@@ -15,7 +13,7 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: true
+    showSearchPage: false
   }
 
   render() {
@@ -41,9 +39,8 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-              <CurrentReading />
-                <WantToRead />
-                <Read />
+              <MainShelf/>
+                
               </div>
             </div>
             <div className="open-search">
