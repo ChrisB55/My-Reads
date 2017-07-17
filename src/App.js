@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
+  
   state = {
     books: []
   }
@@ -13,7 +14,15 @@ class BooksApp extends React.Component {
 componentDidMount() { BooksAPI.getAll().then((books) => { 
   this.setState({ books }) 
 console.log(books)
-}) 
+})
+
+moveBook = (book) => {
+    BooksAPI.update(book).then(() => {
+      this.setState(state => ({
+        books: state.books.filter(b => b.id !== book.id).concat([ book ])
+      }))
+    });
+  }
 
 } 
 
@@ -41,8 +50,8 @@ console.log(books)
             <div className="list-books-content">
               <div>
               <MainShelf
-              booksVisible={this.state.books}/>
-                
+              booksVisible={this.state.books}
+              moveBook={this.shelfMove}  />
               </div>
             </div>
             <div className="open-search">
