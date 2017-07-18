@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
 
 class Shelf extends Component {
+state = {
+    books: []
+  }
 
+componentDidMount() { BooksAPI.getAll().then((books) => { 
+  this.setState({ books }) 
+})
+
+}
     render() {
 
       return (
@@ -13,7 +22,7 @@ class Shelf extends Component {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                       <li>
-                        <Book/>
+                        <Book booksVisible={this.state.books}/>
                       </li>
                       
                     </ol>

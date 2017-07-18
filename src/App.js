@@ -16,7 +16,6 @@ componentDidMount() { BooksAPI.getAll().then((books) => {
 console.log(books)
 })
 
-
 }
   render() {
     return (
