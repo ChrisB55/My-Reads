@@ -1,7 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import MainShelf from './MainShelf'
+import Shelf from './Shelf'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 
@@ -16,16 +16,8 @@ componentDidMount() { BooksAPI.getAll().then((books) => {
 console.log(books)
 })
 
-moveBook = (book) => {
-    BooksAPI.update(book).then(() => {
-      this.setState(state => ({
-        books: state.books.filter(b => b.id !== book.id).concat([ book ])
-      }))
-    });
-  }
 
-} 
-
+}
   render() {
     return (
       <div className="app">
@@ -45,13 +37,13 @@ moveBook = (book) => {
           <Route exact path='/' render={() => (
             <div className="list-books">
             <div className="list-books-title">
-            <h1>MyRead</h1>
+            <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
               <div>
-              <MainShelf
-              booksVisible={this.state.books}
-              moveBook={this.shelfMove}  />
+              <Shelf title="Currently Reading" />
+              <Shelf title="Want to Read"  />
+              <Shelf title="Read" />
               </div>
             </div>
             <div className="open-search">
