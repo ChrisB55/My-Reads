@@ -1,11 +1,12 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import MainShelf from './MainShelf'
+import Shelf from './Shelf'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
+  
   state = {
     books: []
   }
@@ -13,10 +14,10 @@ class BooksApp extends React.Component {
 componentDidMount() { BooksAPI.getAll().then((books) => { 
   this.setState({ books }) 
 console.log(books)
-}) 
+})
 
-} 
 
+}
   render() {
     return (
       <div className="app">
@@ -36,13 +37,13 @@ console.log(books)
           <Route exact path='/' render={() => (
             <div className="list-books">
             <div className="list-books-title">
-            <h1>MyRead</h1>
+            <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
               <div>
-              <MainShelf
-              booksVisible={this.state.books}/>
-                
+              <Shelf title="Currently Reading" books={this.state.books.filter(book => book.shelf === 'currently_reading')} />
+              <Shelf title="Want to Read" books={this.state.books.filter(book => book.shelf === 'want_to_read')} /> 
+                <Shelf title="Read"  books={this.state.books.filter(book => book.shelf === 'read')} /> 
               </div>
             </div>
             <div className="open-search">
