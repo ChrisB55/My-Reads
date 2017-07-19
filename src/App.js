@@ -16,6 +16,7 @@ componentDidMount() { BooksAPI.getAll().then((books) => {
 console.log(books)
 })
 
+
 }
   render() {
     return (
@@ -40,9 +41,9 @@ console.log(books)
             </div>
             <div className="list-books-content">
               <div>
-              <Shelf title="Currently Reading" />
-              <Shelf title="Want to Read"  />
-              <Shelf title="Read" />
+              <Shelf title="Currently Reading" books={this.state.books.filter(book => book.shelf === 'currentlyReading')}/>
+              <Shelf title="Want to Read" books={this.state.books.filter(book => book.shelf === 'wantToRead')} />
+              <Shelf title="Read" books={this.state.books.filter(book => book.shelf === 'read')} />
               </div>
             </div>
             <div className="open-search">

@@ -4,15 +4,7 @@ import Book from './Book'
 
 
 class Shelf extends Component {
-state = {
-    books: []
-  }
 
-componentDidMount() { BooksAPI.getAll().then((books) => { 
-  this.setState({ books }) 
-})
-
-}
     render() {
 
       return (
@@ -21,10 +13,11 @@ componentDidMount() { BooksAPI.getAll().then((books) => {
                 <h2 className="bookshelf-title">{this.props.title}</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      <li>
-                        <Book booksVisible={this.state.books}/>
+                      <li> 
+                      {this.props.books.map(book => 
+                        <Book book={book}  />)
+                      }
                       </li>
-                      
                     </ol>
                   </div>
                 </div>
