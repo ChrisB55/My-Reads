@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import * as BooksAPI from './BooksAPI'
+
 import Book from './Book'
 
 
 class Shelf extends Component {
 
     render() {
-
+    const { moveBook } = this.props
       return (
         <div>
           <div className="bookshelf">
@@ -15,7 +15,11 @@ class Shelf extends Component {
                     <ol className="books-grid">
                       <li> 
                       {this.props.books.map(book => 
-                        <Book book={book}  />)
+                        <Book 
+                        book={book}
+                         key={book.id}  
+                         moveBook={moveBook}
+                         />)
                       }
                       </li>
                     </ol>
