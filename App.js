@@ -2,6 +2,7 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Shelf from './Shelf'
+import Search from './Search'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 
@@ -14,10 +15,17 @@ class BooksApp extends React.Component {
 componentDidMount() { BooksAPI.getAll().then((books) => { 
   this.setState({ books }) 
 console.log(books)
-})
-
-
+  })
 }
+
+moveBook = (book, shelf) => {
+    BooksAPI.update(book, shelf).then((books) => {
+      this.componentDidMount()
+      
+    })
+}
+
+  
   render() {
     return (
       <div className="app">
@@ -41,9 +49,18 @@ console.log(books)
             </div>
             <div className="list-books-content">
               <div>
-              <Shelf title="Currently Reading" books={this.state.books.filter(book => book.shelf === 'currently_reading')} />
-              <Shelf title="Want to Read" books={this.state.books.filter(book => book.shelf === 'want_to_read')} /> 
-                <Shelf title="Read"  books={this.state.books.filter(book => book.shelf === 'read')} /> 
+              <Shelf title="Currently Reading" 
+              books={this.state.books.filter(book => book.shelf === 'currentlyReading')}
+              moveBook={this.moveBook}
+              />
+              <Shelf title="Want to Read" 
+              books={this.state.books.filter(book => book.shelf === 'wantToRead')}
+              moveBook={this.moveBook}
+              />
+              <Shelf title="Read" 
+              books={this.state.books.filter(book => book.shelf === 'read')}
+             moveBook={this.moveBook}
+              />
               </div>
             </div>
             <div className="open-search">
@@ -51,9 +68,17 @@ console.log(books)
               to='/search'
               onClick={() => this.setState({ showSearchPage: true })}>
               Add a book</Link>
+             
+             
+          <Route path='/search' render={({history}) => (
+            <Search
+              onMoveBook={this.moveBook}
+              onClose={() => history.push('/')}
+            />
+          )}
+          />
             </div>
           </div>
-          
           )
         }
         />
