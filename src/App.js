@@ -2,6 +2,7 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Shelf from './Shelf'
+import Search from './Search'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 
@@ -24,6 +25,7 @@ moveBook = (book, shelf) => {
     })
 }
 
+  
   render() {
     return (
       <div className="app">
@@ -57,7 +59,7 @@ moveBook = (book, shelf) => {
               />
               <Shelf title="Read" 
               books={this.state.books.filter(book => book.shelf === 'read')}
-             movebook={this.moveBook}
+             moveBook={this.moveBook}
               />
               </div>
             </div>
@@ -66,9 +68,17 @@ moveBook = (book, shelf) => {
               to='/search'
               onClick={() => this.setState({ showSearchPage: true })}>
               Add a book</Link>
+             
+             
+          <Route path='/search' render={({history}) => (
+            <Search
+              onMoveBook={this.moveBook}
+              onClose={() => history.push('/')}
+            />
+          )}
+          />
             </div>
           </div>
-          
           )
         }
         />
