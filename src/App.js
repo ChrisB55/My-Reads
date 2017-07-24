@@ -72,7 +72,8 @@ moveBook = (book, shelf) => {
              
           <Route path='/search' render={({history}) => (
             <Search
-              onMoveBook={this.moveBook}
+              books={this.state.books}
+              moveBook={this.moveBook}
               onClose={() => history.push('/')}
             />
           )}

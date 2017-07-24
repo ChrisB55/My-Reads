@@ -9,7 +9,8 @@ import escapeRegExp from 'escape-string-regexp'
 
 class Search extends Component {
   state = {
-    query: ''
+    query: '',
+    books: []
    
   }
 
@@ -17,8 +18,8 @@ updateQuery = (query) => {
     this.setState({ query: query.trim() })
   }
   render() {
-    const {book, moveBook} = this.props
-    const {query, books} = this.state
+    const {books, moveBook} = this.props
+    const {query} = this.state
 
     let returnedBooks = []
     if (query) {
