@@ -17,7 +17,7 @@ static propTypes = {
                 <h2 className="bookshelf-title">{this.props.title}</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      <li> 
+                      
                       {this.props.books.map(book => 
                         <Book 
                         book={book}
@@ -25,7 +25,7 @@ static propTypes = {
                          moveBook={moveBook}
                          />)
                       }
-                      </li>
+                      
                     </ol>
                   </div>
                 </div>
