@@ -40,6 +40,7 @@ updateQuery = (query) => {
             <input 
             type='text' 
             placeholder='Search by title or author'
+            value={query}
             onChange={(event) => this.updateQuery(event.target.value)}/>
           </div>
         </div>

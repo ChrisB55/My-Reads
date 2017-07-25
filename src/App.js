@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Shelf from './Shelf'
 import Search from './Search'
+import Header from './Header'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 
@@ -28,27 +29,11 @@ moveBook = (book, shelf) => {
   
   render() {
     return (
-      <div className="app">
-        {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
-              <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author"/>
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
-        ) : (
-          <Route exact path='/' render={() => (
+      <div className="app"> 
+          <Route path='/' render={() => (
             <div className="list-books">
-            <div className="list-books-title">
-            <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
+            <Header
+            />
               <Shelf title="Currently Reading" 
               books={this.state.books.filter(book => book.shelf === 'currentlyReading')}
               moveBook={this.moveBook}
@@ -61,29 +46,26 @@ moveBook = (book, shelf) => {
               books={this.state.books.filter(book => book.shelf === 'read')}
              moveBook={this.moveBook}
               />
-              </div>
-            </div>
+              
+            
             <div className="open-search">
-              <Link 
-              to='/search'
-              onClick={() => this.setState({ showSearchPage: true })}>
-              Add a book</Link>
+              <Link to='/search'>Add a book</Link>
+             </div>
              
-             
-          <Route path='/search' render={({history}) => (
+          <Route exact path='/search' render={() => (
             <Search
               books={this.state.books}
               moveBook={this.moveBook}
-              onClose={() => history.push('/')}
+              
             />
           )}
           />
-            </div>
+            
           </div>
           )
         }
         />
-        )}
+        
       </div>
     )
   }

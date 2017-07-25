@@ -12,6 +12,7 @@ static propTypes = {
     const { moveBook } = this.props
       return (
         <div>
+        <div className="list-books-content">
           <div className="bookshelf">
                 <h2 className="bookshelf-title">{this.props.title}</h2>
                   <div className="bookshelf-books">
@@ -27,6 +28,7 @@ static propTypes = {
                       </li>
                     </ol>
                   </div>
+                </div>
                 </div>
                 </div>
 
