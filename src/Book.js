@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+
+//This component manages the rendering of the returned data from the books API and selection feature making use of the moveBook feature.
 class Book extends Component {
-  
  static propTypes = {
     book: PropTypes.object.isRequired,
-    
   }
 
   render() {
     const { book, moveBook} = this.props;
     return (
-      <div className="book">
-        <ol>
+      <li>
+        <div className="book">
           <div className="book-top">
             <div
               className="book-cover"
@@ -26,8 +26,7 @@ class Book extends Component {
               <select value={book.shelf}
                onChange={(e) => moveBook(book, e.target.value)}>
                 <option value="none" disabled>
-                  Move to...
-                </option>
+                  Move to... </option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>
@@ -41,8 +40,8 @@ class Book extends Component {
           <div className="book-authors">
             {book.authors}
           </div>
-        </ol>
       </div>
+    </li>
     );
   }
 }

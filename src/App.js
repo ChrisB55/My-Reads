@@ -7,6 +7,8 @@ import Header from './Header';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 
+//App.js is the primary component. 
+//Contains logic for moving books across shelf components and main rendering. 
 class BooksApp extends React.Component {
   state = {
     books: [],
@@ -33,7 +35,8 @@ class BooksApp extends React.Component {
           path="/"
           render={() => (
             <div className="list-books">
-              <Header />
+              <Header 
+              />
               <Shelf
                 title="Currently Reading"
                 books={this.state.books.filter(book => book.shelf === 'currentlyReading')}
@@ -49,20 +52,21 @@ class BooksApp extends React.Component {
                 books={this.state.books.filter(book => book.shelf === 'read')}
                 moveBook={this.moveBook}
               />
-
               <div className="open-search">
                 <Link to="/search">Add a book</Link>
               </div>
-            </div>)}
+            </div>
+          )}
         />
-
         <Route
           exact
           path="/search"
-          render={() => <Search 
-            books={this.state.books} 
-            moveBook={this.moveBook} 
-            />}
+          render={() => 
+            <Search 
+              books={this.state.books} 
+              moveBook={this.moveBook} 
+            />
+          }
         />
       </div>
     );
