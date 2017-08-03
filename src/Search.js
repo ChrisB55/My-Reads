@@ -12,19 +12,30 @@ class Search extends Component {
 
   }
 
-  updateQuery = (query, maxResults) => {
-    if (!query) {
-      this.setState({query: '', books: []})
-    } else {
-      this.setState({ query: query.trim() })
-      BooksAPI.search(query, maxResults).then((books) => {
-       
-        books.map(book => 
-          (this.props.books.filter((newBook) => newBook.id === book.id).map(newBook => book.shelf = newBook.shelf)))
-        this.setState({books})
+ updateQuery = (query, maxResults) => {
+  if (!query) {
+    this.setState({query: '', books: []})
+  } else {
+    this.setState({ query: query.trim() })
+
+    BooksAPI.search(query, maxResults).then((books) => {
+      if (!books || books.error) {
+        this.setState({ books: []})
+        return
+      }
+
+      this.setState({ 
+        books: books.map(book => {
+          this.props.books.forEach(bookOnShelf => {
+            if (bookOnShelf.id === book.id) book.shelf = bookOnShelf.shelf
+          })
+          return book
+        })
       })
-    }
+    })
   }
+}
+
 
   render () {
     const { moveBook} = this.props
