@@ -23,7 +23,9 @@ class Search extends Component {
         this.setState({ books: []})
         return
       }
-
+books.map(book => {
+          return book.shelf = 'none'
+        })
       this.setState({ 
         books: books.map(book => {
           this.props.books.forEach(bookOnShelf => {
@@ -44,7 +46,8 @@ class Search extends Component {
         <div className="search-books-bar">
           <Link to='/' className='close-search'>Close</Link>
           <div className="search-books-input-wrapper">
-            <input 
+            <input
+              
               type="text" 
               placeholder="Search by title or author"
               onChange={(e) => this.updateQuery(e.target.value)}/>
