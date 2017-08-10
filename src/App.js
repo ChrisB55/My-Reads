@@ -23,16 +23,15 @@ class BooksApp extends React.Component {
 
   moveBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then( books => {
-  
-  const updatedBook = {
+      const updatedBook = {
         ...book,
         shelf
-    }
-  //Set the new state with the updated book at the end of the array
+    };
+
   this.setState(state => ({
         books: state.books.filter(b => b.id !== book.id).concat([updatedBook])
-  }))
-})
+    }))
+  })
 }
 
   render() {
